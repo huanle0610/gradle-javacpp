@@ -162,3 +162,10 @@ signing {
         sign publishing.publications.mavenJavacppPlatform
     }
 }
+
+task printDeps {
+    doLast {
+        println "Dependencies:"
+        configurations.runtimeClasspath.forEach{println it}
+    }
+}
