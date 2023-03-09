@@ -3,7 +3,11 @@ plugins {
     id 'org.bytedeco.gradle-javacpp-build' version '1.5.8'
     id 'maven-publish'
     id 'signing'
+    id 'idea'
 }
+
+// global properties
+ext.os = System.getProperty('os.name').toLowerCase()
 
 group = 'org.bytedeco'
 version = "1.2.13-$javacppVersion"
@@ -12,6 +16,13 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+}
+
+idea {
+    module {
+        sourceDirs += file('build/generated/sources/javacpp')
+        generatedSourceDirs += file('build/generated/sources/javacpp')
+    }
 }
 
 dependencies {
@@ -42,7 +53,12 @@ tasks.withType(org.bytedeco.gradle.javacpp.BuildTask) {
 }
 
 javacppBuildCommand {
-    buildCommand = ['bash', 'build.sh']
+    if (os.contains('windows')) {
+        buildCommand = ['D:/msys64/usr/bin/bash.exe', 'build.sh']
+    }
+    else {
+        buildCommand = ['bash', 'build.sh']
+    }
 }
 
 javacppBuildParser {
@@ -51,6 +67,9 @@ javacppBuildParser {
 }
 
 javacppBuildCompiler {
+    if (os.contains('windows')) {
+        propertyKeysAndValues = [ 'platform.compiler' : projectDir.path + "/cl.bat" ]
+    }
     copyLibs = true
 }
 

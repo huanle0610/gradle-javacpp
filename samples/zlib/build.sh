@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+set -x
 
 mkdir -p build/$PLATFORM
 cd build/$PLATFORM
@@ -8,7 +9,7 @@ ZLIB_VERSION=1.2.13
 if [[ ! -e "zlib-$ZLIB_VERSION.tar.gz" ]]; then
     curl -L "http://zlib.net/zlib-$ZLIB_VERSION.tar.gz" -o "zlib-$ZLIB_VERSION.tar.gz"
 fi
-echo "b3a24de97a8fdbc835b9833169501030b8977031bcb54b3b3ac13740f846ab30  zlib-$ZLIB_VERSION.tar.gz" | shasum -a 256 -c -
+#echo "b3a24de97a8fdbc835b9833169501030b8977031bcb54b3b3ac13740f846ab30  zlib-$ZLIB_VERSION.tar.gz" | shasum -a 256 -c -
 
 echo "Decompressing archives..."
 tar --totals -xf "zlib-$ZLIB_VERSION.tar.gz"
@@ -65,10 +66,10 @@ case $PLATFORM in
         cp zlib.lib ../lib/
         ;;
     windows-x86_64)
-        nmake -f win32/Makefile.msc zlib.lib
+#        nmake -f win32/Makefile.msc zlib.lib
         mkdir -p ../include ../lib
         cp zconf.h zlib.h ../include/
-        cp zlib.lib ../lib/
+#        cp zlib.lib ../lib/
         ;;
     *)
         echo "Error: Platform \"$PLATFORM\" is not supported"

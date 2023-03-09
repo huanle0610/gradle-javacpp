@@ -236,7 +236,7 @@ public class BuildTask extends DefaultTask {
                 .addProperty("platform.executablepath", getExecutablePath());
 
         String extension = builder.getProperty("platform.extension");
-        getLogger().info(new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath()).getAbsolutePath());
+//        getLogger().info(new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath()).getAbsolutePath());
         getLogger().info("##Detected platform \"" + Loader.Detector.getPlatform() + "\"");
         getLogger().info("Building platform \"" + builder.getProperty("platform") + "\""
                 + (extension != null && extension.length() > 0 ? " with extension \"" + extension + "\"" : ""));
