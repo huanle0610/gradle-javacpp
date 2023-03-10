@@ -1,0 +1,11 @@
+build
+.cache
+out
+*.class
+*.obj
+*.exp
+*.lib
+*.dll
+.vscode
+java/io/amtf/Test.java
+*.log
