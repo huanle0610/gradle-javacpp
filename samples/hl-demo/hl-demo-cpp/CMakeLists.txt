@@ -32,3 +32,10 @@ target_link_libraries(rsa_demo PRIVATE cryptopp::cryptopp)
 
 add_executable(rsaes-oaep-sha256 src/rsaes-oaep-sha256.cpp)
 target_link_libraries(rsaes-oaep-sha256 PRIVATE cryptopp::cryptopp)
+
+add_executable(rsaes-oaep-sha256-string src/rsaes-oaep-sha256-string.cpp)
+target_link_libraries(rsaes-oaep-sha256-string PRIVATE cryptopp::cryptopp)
+target_link_libraries(rsaes-oaep-sha256 PRIVATE cryptopp::cryptopp)
+
+add_executable(sha1_demo src/sha1.cpp)
+target_link_libraries(sha1_demo PRIVATE cryptopp::cryptopp)
